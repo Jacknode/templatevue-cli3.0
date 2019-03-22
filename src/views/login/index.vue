@@ -1,56 +1,61 @@
 <template>
-  <div class="login-container">
-    <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
-      <h3 class="title">惠乐游供应商管理系统</h3>
-      <el-form-item prop="username">
-        <span class="svg-container svg-container_login">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="请输入手机号"></el-input>
-        
-        <!--<el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />-->
-      </el-form-item>
-      <el-form-item>
-        <span class="svg-container svg-container_login">
-          <svg-icon icon-class="user" />
-        </span>
-         <el-input type="text" v-model="loginForm.checkcode" auto-complete="off" placeholder="请输入验证码"></el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password"></svg-icon>
-        </span>
-        <!--<el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"-->
-          <!--placeholder="password"></el-input>-->
-        <el-input :type="pwdType" v-model="loginForm.password" auto-complete="off" placeholder="请输入密码"></el-input>
-          <span class="show-pwd" @click.stop="showPwd"><svg-icon icon-class="eye" /></span>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
-          登录
-        </el-button>
-      </el-form-item>
-      <!--<div class="tips">-->
-        <!--<span style="margin-right:20px;">username: admin</span>-->
-        <!--<span> password: admin</span>-->
-      <!--</div>-->
-    </el-form>
-  </div>
+	<div class="login-container">
+		<el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
+			<h3 class="title">惠乐游供应商管理系统</h3>
+			<el-form-item prop="username">
+				<span class="svg-container svg-container_login">
+					<svg-icon icon-class="user" />
+				</span>
+				<el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="请输入手机号"></el-input>
+
+				<!--<el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />-->
+			</el-form-item>
+
+			<el-form-item style="border: none;background-color:transparent;">
+				<div class="code">
+					<input type="text" placeholder="请输入验证码" v-model="loginForm.checkcode">
+					<img v-lazy="code" alt="" @click='getCode'>
+				</div>
+			</el-form-item>
+
+
+			<el-form-item prop="password">
+				<span class="svg-container">
+					<svg-icon icon-class="password"></svg-icon>
+				</span>
+				<!--<el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"-->
+				<!--placeholder="password"></el-input>-->
+				<el-input :type="pwdType" v-model="loginForm.password" auto-complete="off" placeholder="请输入密码"></el-input>
+				<span class="show-pwd" @click.stop="showPwd">
+					<svg-icon icon-class="eye" /></span>
+			</el-form-item>
+			<el-form-item>
+				<el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
+					登录
+				</el-button>
+			</el-form-item>
+			<!--<div class="tips">-->
+			<!--<span style="margin-right:20px;">username: admin</span>-->
+			<!--<span> password: admin</span>-->
+			<!--</div>-->
+		</el-form>
+	</div>
 </template>
 
 <script>
-import { isvalidUsername } from '@/utils/validate'
+	import { isvalidUsername } from '@/utils/validate'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 export default {
   name: 'login',
   data() {
     return {
+			code:'',
       type:'password',
       loginForm: {
-        username: '15888888888',
-        password: '123456',
-        checkcode:'123456'
+        username: '15877777777',
+        password: '',
+        checkcode:''
       },
       loginRules: {
         username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
@@ -60,7 +65,17 @@ export default {
       pwdType: 'password'
     }
   },
+	created(){
+		this.getCode();
+	},
   methods: {
+		getCode(){
+			this.$store.dispatch('getCode',{}).then(v=>{
+				this.code=
+				'data:image/png;base64,' + btoa(
+				new Uint8Array(v).reduce((data, byte) => data + String.fromCharCode(byte), ''))
+			})
+		},
     showPwd() {
       if (this.pwdType === 'password') {
         this.pwdType = ''
@@ -76,15 +91,9 @@ export default {
           formData.append('username',this.loginForm.username)
           formData.append('password',this.loginForm.password)
           formData.append('checkcode',this.loginForm.checkcode)
-          console.log(formData)
-          this.$store.dispatch('Login', JSON.stringify({
-                "username": "15888888888",
-                "password": "123456",
-                "checkcode": "123456"
-            }
-            )).then((data) => {
+          this.$store.dispatch('Login', formData).then((data) => {
+						this.$router.push({name:'dashboard'});
             this.loading = false;
-
           },err=>{
             this.loading = false;
             this.$notify({
@@ -113,8 +122,41 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" type="text/scss">
-$bg:#2d3a4b;
+	$bg:#2d3a4b;
 $light_gray:#eee;
+	
+	.code{
+		height:50px;
+	}
+	.code input{
+		outline:none;
+		border:1px solid #454545;
+		width: 50%;
+		font:14px/50px '微软雅黑';
+		padding:0 12px;
+		color:#fff;
+		background-color:rgba(0,0,0,.1);
+		float:left;
+	}
+	.code img{
+		float:right;
+		width:43%;
+		height:50px;
+	}
+	::-webkit-input-placeholder { /* WebKit browsers */
+  color: rgb(192,196,204);
+  font-size: 14px;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: rgb(192,196,204);
+  font-size: 14px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: rgb(192,196,204);
+  font-size: 14px;
+}   
 
 /* reset element-ui css */
 .login-container {
@@ -147,7 +189,7 @@ $light_gray:#eee;
 </style>
 
 <style rel="stylesheet/scss" lang="scss" scoped type="text/scss">
-$bg:#2d3a4b;
+	$bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 .login-container {

@@ -1,3 +1,4 @@
+const str='http://cs.xhfwy.com/public/index.php/client/v3';
 import {
   login
 } from '@/api/login'
@@ -32,18 +33,22 @@ const user = {
 
   actions: {
     // 登录
-    Login({
-      commit
-    }, userInfo) {
-      console.log(axios)
+    Login({commit}, data) {
       return new Promise((relove, reject) => {
-        axios.post('/api/client/v3/user/login', userInfo)
+        axios.post(str+'/user/login', data)
           .then(data => {
-            console.log(data)
             relove(data.data)
           })
       })
     },
+		getCode({commit}, data) {
+		  return new Promise((relove, reject) => {
+		    axios.get(str+'/user/verfiy',{responseType: 'arraybuffer'})
+		      .then(data => {
+		        relove(data.data)
+		      })
+		  })
+		},
   }
 }
 

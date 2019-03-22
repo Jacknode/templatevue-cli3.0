@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">欢迎您:{{userInfo.sm_ui_Name}}</div>
+    <div class="dashboard-text">欢迎您</div>
     <!--<div class="dashboard-text">roles:<span v-for='role in roles' :key='role'>{{role}}</span></div>-->
   </div>
 </template>

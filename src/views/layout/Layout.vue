@@ -27,12 +27,12 @@ export default {
   },
   mixins: [ResizeMixin],
   created(){
-    let admin = JSON.parse(sessionStorage.getItem('admin'));
-    this.userInfo = admin;
-    if(!admin){
-      this.$router.push({ name:'Login' });
-      return
-    }
+//     let admin = JSON.parse(sessionStorage.getItem('admin'));
+//     this.userInfo = admin;
+//     if(!admin){
+//       this.$router.push({ name:'Login' });
+//       return
+//     }
   },
   computed: {
     sidebar() {
