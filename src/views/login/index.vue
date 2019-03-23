@@ -1,7 +1,7 @@
 <template>
 	<div class="login-container">
 		<el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
-			<h3 class="title">惠乐游供应商管理系统</h3>
+			<h3 class="title">法务云律师管理系统</h3>
 			<el-form-item prop="username">
 				<span class="svg-container svg-container_login">
 					<svg-icon icon-class="user" />
@@ -11,7 +11,7 @@
 				<!--<el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />-->
 			</el-form-item>
 
-			<el-form-item style="border: none;background-color:transparent;">
+			<el-form-item style="border: none;background-color:transparent;" >
 				<div class="code">
 					<input type="text" placeholder="请输入验证码" v-model="loginForm.checkcode">
 					<img v-lazy="code" alt="" @click='getCode'>
@@ -43,14 +43,14 @@
 </template>
 
 <script>
-	import { isvalidUsername } from '@/utils/validate'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+	import { isvalidUsername } from '@/utils/validate';
+	import { getToken, setToken, removeToken } from '@/utils/auth';
 
 export default {
   name: 'login',
   data() {
     return {
-			code:'',
+	  code:'',
       type:'password',
       loginForm: {
         username: '15877777777',
@@ -75,6 +75,7 @@ export default {
 				'data:image/png;base64,' + btoa(
 				new Uint8Array(v).reduce((data, byte) => data + String.fromCharCode(byte), ''))
 			})
+
 		},
     showPwd() {
       if (this.pwdType === 'password') {
@@ -124,7 +125,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss" type="text/scss">
 	$bg:#2d3a4b;
 $light_gray:#eee;
-	
+
 	.code{
 		height:50px;
 	}
@@ -139,6 +140,7 @@ $light_gray:#eee;
 		float:left;
 	}
 	.code img{
+		cursor:pointer;
 		float:right;
 		width:43%;
 		height:50px;
@@ -156,7 +158,7 @@ $light_gray:#eee;
 :-ms-input-placeholder { /* Internet Explorer 10+ */
   color: rgb(192,196,204);
   font-size: 14px;
-}   
+}
 
 /* reset element-ui css */
 .login-container {
