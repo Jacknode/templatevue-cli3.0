@@ -5,13 +5,16 @@
   <!--<router-view></router-view>-->
   <!--</transition>-->
   <!--</section>-->
-  <section class="app-main" @click.stop="appMain">
-    <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <router-view :key="key"></router-view>
-      </keep-alive>
-    </transition>
-  </section>
+	<div class="wrap">
+		<section class="app-main" @click.stop="appMain">
+		  <transition name="fade-transform" mode="out-in">
+		    <keep-alive :include="cachedViews">
+		      <router-view :key="key"></router-view>
+		    </keep-alive>
+		  </transition>
+		</section>
+	</div>
+  
 </template>
 
 <script>
@@ -53,3 +56,14 @@
     }
   }
 </script>
+
+<style scoped>
+	.wrap{
+		padding:20px;
+	}
+	.app-main{
+		padding:10px;
+		box-shadow:0 0 10px #ccc;
+	}
+	
+</style>

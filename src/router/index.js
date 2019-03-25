@@ -23,57 +23,109 @@ import Layout from '../views/layout/Layout';
     icon: 'svg-name'             the icon show in the sidebar,
   }
  **/
-export const constantRouterMap = [{
-    path: '/login',
-    name: 'Login',
-    component: _import('login/index'),
-    hidden: true
-  }, {
-    path: '/',
-    name: 'Login',
-    component: _import('login/index'),
-    hidden: true
-  }, {
-    path: '/authredirect',
-    component: _import('login/authredirect'),
-    hidden: true
-  }, {
-    path: '/404',
-    component: () =>
-      import ('@/views/404'),
-    hidden: true
-  }, {
-    path: '/demo',
-    component: () =>
-      import ('@/views/demo'),
-    hidden: true
-  }, {
-    path: '/dashboard',
-    component: Layout,
-    children: [{
-      path: '',
-      component: () =>
-        import ('@/views/dashboard'),
-      name: 'dashboard',
-      meta: {
-        title: 'dashboard',
-        icon: 'dashboard',
-        noCache: true
-      }
-    }]
-  },
-  /**
-   *  404
-   **/
-  // {path: '*', redirect: '/404', hidden: true}
+export const constantRouterMap = [
+	{
+		path: '/login',
+		name: 'Login',
+		component: _import('login/index'),
+		hidden: true
+	},
+	{
+		path: '/',
+		name: 'Login',
+		component: _import('login/index'),
+		hidden: true
+	},
+	{
+		path: '/authredirect',
+		component: _import('login/authredirect'),
+		hidden: true
+	},
+	{
+		path: '/404',
+		component: () =>
+			import('@/views/404'),
+		hidden: true
+	},
+	{
+		path: '/demo',
+		component: () =>
+			import('@/views/demo'),
+		hidden: true
+	},
+	{
+		path: '/dashboard',
+		component: Layout,
+		children: [
+			{
+			path: '',
+			component: () =>
+				import('@/views/dashboard'),
+			name: 'dashboard',
+			meta: {
+				title: 'dashboard',
+				icon: 'dashboard',
+				noCache: true
+			}
+		}, 
+		{//个人资料
+			path: 'admin',
+			component: () =>
+				import('@/views/admin/index'),
+			name: 'admin',
+			meta: {
+				title: 'admin',
+				icon: 'persoanl',
+				noCache: true
+			}
+		},
+		{//个人收益
+			path: 'myProfit',
+			component: () =>
+				import('@/views/myProfit/index'),
+			name: 'myProfit',
+			meta: {
+				title: 'myProfit',
+				icon: 'persoanl',
+				noCache: true
+			}
+		},
+		{//文章编辑
+			path: 'articleEdit',
+			component: () =>
+				import('@/views/articleEdit/index'),
+			name: 'articleEdit',
+			meta: {
+				title: 'articleEdit',
+				icon: 'persoanl',
+				noCache: true
+			}
+		},
+		{//文章列表
+			path: 'articleList',
+			component: () =>
+				import('@/views/articleList/index'),
+			name: 'articleList',
+			meta: {
+				title: 'articleList',
+				icon: 'persoanl',
+				noCache: true
+			}
+		},
+		]
+	},
+	/**
+	 *  404
+	 **/
+	// {path: '*', redirect: '/404', hidden: true}
 ];
 
 export default new VueRouter({
-  // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({
-    y: 0
-  }),
-  routes: constantRouterMap
+	// mode: 'history', //后端支持可开
+	scrollBehavior: () => ({
+		y: 0
+	}),
+	routes: constantRouterMap
 })
 
 export const asyncRouterMap = []

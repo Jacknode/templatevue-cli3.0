@@ -11,10 +11,10 @@
 				<!--<el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />-->
 			</el-form-item>
 
-			<el-form-item style="border: none;background-color:transparent;" >
+			<el-form-item style="border: none;background-color:transparent;">
 				<div class="code">
 					<input type="text" placeholder="请输入验证码" v-model="loginForm.checkcode">
-					<img v-lazy="code" alt="" @click='getCode'>
+					<img :src="code" alt="" @click='getCode'>
 				</div>
 			</el-form-item>
 
@@ -54,8 +54,8 @@ export default {
       type:'password',
       loginForm: {
         username: '15877777777',
-        password: '',
-        checkcode:''
+        password: '123456',
+        checkcode:'1'
       },
       loginRules: {
         username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
@@ -75,8 +75,13 @@ export default {
 				'data:image/png;base64,' + btoa(
 				new Uint8Array(v).reduce((data, byte) => data + String.fromCharCode(byte), ''))
 			})
-
 		},
+		open6() {
+        this.$message({
+          message: '恭喜你，这是一条成功消息',
+          type: 'success'
+        });
+      },
     showPwd() {
       if (this.pwdType === 'password') {
         this.pwdType = ''
@@ -85,6 +90,13 @@ export default {
       }
     },
     handleLogin() {
+			if(!this.loginForm.checkcode){
+				this.$message({
+					message:'请输入验证码',
+					type:'error'
+				})
+				return;
+			}
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
@@ -92,17 +104,23 @@ export default {
           formData.append('username',this.loginForm.username)
           formData.append('password',this.loginForm.password)
           formData.append('checkcode',this.loginForm.checkcode)
-          this.$store.dispatch('Login', formData).then((data) => {
-						this.$router.push({name:'dashboard'});
+          this.$store.dispatch('Login', formData)
+					.then(data => {
+						sessionStorage.setItem('userInfo',JSON.stringify(data))
+						console.log(data)
+						this.$message({
+							message:data.message,
+							type:"success"
+						})
+						this.$router.push({name:'dashboard'});	
             this.loading = false;
-          },err=>{
+          },error=>{
             this.loading = false;
-            this.$notify({
-              message: err,
-              type: 'error'
-            });
+						this.$message({
+						  message: error,
+						  type: 'error'
+						});
           }).catch((err) => {
-
             this.loading = false;
           })
         } else {
