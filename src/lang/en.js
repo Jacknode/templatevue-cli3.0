@@ -1,6 +1,9 @@
 export default {
   route: {
     dashboard: 'Dashboard',
+    personalProfit: 'personalProfit',
+    personalMessage: 'personalMessage',
+    myRelease: 'myRelease',
     introduction: 'Introduction',
     documentation: 'Documentation',
     guide: 'Guide',

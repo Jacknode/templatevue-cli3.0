@@ -28,52 +28,87 @@ export const constantRouterMap = [{
     name: 'Login',
     component: _import('login/index'),
     hidden: true
-  }, {
+}, {
     path: '/',
     name: 'Login',
     component: _import('login/index'),
     hidden: true
-  }, {
+}, {
     path: '/authredirect',
     component: _import('login/authredirect'),
     hidden: true
-  }, {
+}, {
     path: '/404',
     component: () =>
-      import ('@/views/404'),
+        import ('@/views/404'),
     hidden: true
-  }, {
+}, {
     path: '/demo',
     component: () =>
-      import ('@/views/demo'),
+        import ('@/views/demo'),
     hidden: true
-  }, {
+}, {
     path: '/dashboard',
     component: Layout,
-    children: [{
-      path: '',
-      component: () =>
-        import ('@/views/dashboard'),
-      name: 'dashboard',
-      meta: {
-        title: 'dashboard',
-        icon: 'dashboard',
-        noCache: true
-      }
-    }]
-  },
-  /**
-   *  404
-   **/
-  // {path: '*', redirect: '/404', hidden: true}
+    children: [
+        {
+            path: '',
+            component: () =>
+                import ('@/views/dashboard'),
+            name: 'dashboard',
+            meta: {
+                title: 'dashboard',
+                icon: 'dashboard',
+                noCache: true
+            }
+        },
+        {
+            path: 'personalProfit',
+            component: () =>
+                import ('@/views/personalProfit'),
+            name: 'personalProfit',
+            meta: {
+                title: 'personalProfit',
+                icon: 'dashboard',
+                noCache: true
+            }
+        },
+        {
+            path: 'personalMessage',
+            component: () =>
+                import ('@/views/personalMessage'),
+            name: 'personalMessage',
+            meta: {
+                title: 'personalMessage',
+                icon: 'dashboard',
+                noCache: true
+            }
+        },
+        {
+            path: 'myRelease',
+            component: () =>
+                import ('@/views/myRelease'),
+            name: 'myRelease',
+            meta: {
+                title: 'myRelease',
+                icon: 'dashboard',
+                noCache: true
+            }
+        },
+    ]
+},
+    /**
+     *  404
+     **/
+    // {path: '*', redirect: '/404', hidden: true}
 ];
 
 export default new VueRouter({
-  // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({
-    y: 0
-  }),
-  routes: constantRouterMap
+    // mode: 'history', //后端支持可开
+    scrollBehavior: () => ({
+        y: 0
+    }),
+    routes: constantRouterMap
 })
 
 export const asyncRouterMap = []

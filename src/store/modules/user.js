@@ -39,18 +39,25 @@ const user = {
       return new Promise((relove, reject) => {
         axios.post(str+'/user/login', data)
           .then(data => {
-            relove(data.data)
+            console.log(data)
+            let res=data.data;
+            if(Number(res.code)==10000){
+              relove(res)
+            }else{
+              reject(res.message)
+            }
           })
       })
     },
-		getCode({commit}, data) {
-		  return new Promise((relove, reject) => {
-		    axios.get(str+'/user/verfiy',{responseType: 'arraybuffer'})
-		      .then(data => {
-		        relove(data.data)
-		      })
-		  })
-		},
+    //验证码
+    getCode({commit}, data) {
+      return new Promise((relove, reject) => {
+        axios.get(str+'/user/verfiy',{responseType: 'arraybuffer'})
+          .then(data => {
+            relove(data.data);
+          })
+      })
+    },
   }
 }
 
