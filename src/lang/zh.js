@@ -2,10 +2,9 @@ export default {
   route: {
     dashboard: '首页',
 		admin:'个人',
-		myProfit:'个人信息',
 		articleEdit:'文章编辑',
-		articleList:'文章列表',
 
+    introduction: '简述',
     documentation: '文档',
     guide: '引导页',
     VendorInformation:'供应商信息',

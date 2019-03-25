@@ -12,7 +12,7 @@ router.beforeEach((to, from, next) => {
         NProgress.done();
       }); // if current page is dashboard will not trigger	afterEach hook, so manually handle it
     } else {
-      let admin = JSON.parse(sessionStorage.getItem('admin'))
+      let admin = JSON.parse(sessionStorage.getItem('userInfo'))
       if (!admin) {
         next({
           path: '/login'

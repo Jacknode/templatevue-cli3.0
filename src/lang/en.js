@@ -2,9 +2,7 @@ export default {
   route: {
     dashboard: 'Dashboard',
 		admin:'Admin',
-		myProfit:'myProfit',
 		articleEdit:'articleEdit',
-		articleList:'articleList',
 		
     introduction: 'Introduction',
     documentation: 'Documentation',
