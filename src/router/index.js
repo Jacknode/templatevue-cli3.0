@@ -64,12 +64,12 @@ export const constantRouterMap = [{
             }
         },
 		{//个人资料
-			path: 'admin',
+			path: 'myPersonal',
 			component: () =>
-				import('@/views/admin/index'),
-			name: 'admin',
+				import('@/views/myPersonal/index'),
+			name: 'myPersonal',
 			meta: {
-				title: 'admin',
+				title: 'myPersonal',
 				icon: 'persoanl',
 				noCache: true
 			}

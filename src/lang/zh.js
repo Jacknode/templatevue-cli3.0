@@ -1,8 +1,8 @@
 export default {
   route: {
     dashboard: '首页',
-		admin:'个人',
-		articleEdit:'文章编辑',
+    myPersonal:'个人信息',
+    articleEdit:'文章编辑',
 
     introduction: '简述',
     documentation: '文档',

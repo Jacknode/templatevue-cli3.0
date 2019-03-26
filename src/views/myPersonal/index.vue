@@ -13,7 +13,7 @@
         prop="industry_cn"
         label="行业">
       </el-table-column>
-	  
+
 	  <el-table-column
 	  align='center'
 	    prop="sex"
@@ -47,13 +47,14 @@
 				formData.append('token',this.userInfo.token);
 				this.$store.dispatch('myPersonal',formData)
 				.then(data=>{
+					console.log(data)
 					this.lawyerInfo=[data.data];
 				})
 			}
 		}
 	}
-	
+
 </script>
-	
+
 <style>
 </style>

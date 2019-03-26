@@ -96,9 +96,12 @@
                         formData.append('password', this.loginForm.password)
                         formData.append('checkcode', this.loginForm.checkcode)
                         this.$store.dispatch('Login', formData).then((data) => {
-							console.log(data,111111)
 							sessionStorage.setItem('userInfo',JSON.stringify(data))
                             this.$router.push({name: 'dashboard'});
+							this.$message({
+                                message:data.message,
+                                type:'success'
+                            })
                             this.loading = false;
                         }, err => {
                             this.$message({
