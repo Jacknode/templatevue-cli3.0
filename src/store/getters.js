@@ -1,4 +1,6 @@
 const getters = {
+	setPersonalInfo: state => state.permission.setPersonalInfo,
+	
   sidebar: state => state.app.sidebar,
   language: state => state.app.language,
   isGenerateRoutes: state=>state.permission.isGenerateRoutes,

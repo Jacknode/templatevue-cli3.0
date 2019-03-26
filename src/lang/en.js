@@ -8,6 +8,7 @@ export default {
     documentation: 'Documentation',
     guide: 'Guide',
     travel:'Travel',
+		aloneArticleEdit:'',
     AdminQueryUserOrder: 'Admin Query User Order',
 
 

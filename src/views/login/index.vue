@@ -64,6 +64,9 @@
         },
         created() {
             this.getCode();
+			if( sessionStorage.getItem('userInfo') ){
+				sessionStorage.removeItem('userInfo')
+			}
         },
         methods: {
             getCode() {

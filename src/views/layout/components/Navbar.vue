@@ -84,7 +84,6 @@
       },
       logout() {
         this.$router.push({name:'Login'});
-        sessionStorage.removeItem('userInfo');
       }
     }
   }

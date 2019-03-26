@@ -25,80 +25,151 @@ import Layout from '../views/layout/Layout';
  **/
 
 export const constantRouterMap = [{
-    path: '/login',
-    name: 'Login',
-    component: _import('login/index'),
-    hidden: true
-}, {
-    path: '/',
-    name: 'Login',
-    component: _import('login/index'),
-    hidden: true
-}, {
-    path: '/authredirect',
-    component: _import('login/authredirect'),
-    hidden: true
-}, {
-    path: '/404',
-    component: () =>
-        import ('@/views/404'),
-    hidden: true
-}, {
-    path: '/demo',
-    component: () =>
-        import ('@/views/demo'),
-    hidden: true
-}, {
-    path: '/dashboard',
-    component: Layout,
-    children: [
-        {
-            path: '',
-            component: () =>
-                import ('@/views/dashboard'),
-            name: 'dashboard',
-            meta: {
-                title: 'dashboard',
-                icon: 'dashboard',
-                noCache: true
-            }
-        },
-		{//个人资料
+		path: '/login',
+		name: 'Login',
+		component: _import('login/index'),
+		hidden: true
+	}, {
+		path: '/',
+		name: 'Login',
+		component: _import('login/index'),
+		hidden: true
+	}, {
+		path: '/authredirect',
+		component: _import('login/authredirect'),
+		hidden: true
+	}, {
+		path: '/404',
+		component: () =>
+			import('@/views/404'),
+		hidden: true
+	}, {
+		path: '/demo',
+		component: () =>
+			import('@/views/demo'),
+		hidden: true
+	}, {
+		path: '/dashboard',
+		component: Layout,
+		children: [{
+				path: '',
+				component: () =>
+					import('@/views/dashboard'),
+				name: 'dashboard',
+				meta: {
+					title: 'dashboard',
+					icon: 'dashboard',
+					noCache: true
+				}
+			},
+
+		],
+
+	},
+	{ //个人资料
+		path: '/myPersonalIndex',
+		component: Layout,
+		name: 'myPersonalIndex',
+		redirect: '/myPersonalIndex/myPersonal',
+		meta: {
+			title: 'myPersonal',
+			icon: 'persoanl',
+			noCache: true
+		},
+		children: [{
 			path: 'myPersonal',
+			name: 'myPersonal',
 			component: () =>
 				import('@/views/myPersonal/index'),
-			name: 'myPersonal',
 			meta: {
 				title: 'myPersonal',
 				icon: 'persoanl',
 				noCache: true
 			}
+		}]
+	},
+	{ //文章编辑
+		path: '/articleEditIndex',
+		component: Layout,
+		name: 'articleEditIndex',
+		redirect: '/articleEditIndex/articleEdit',
+		meta: {
+			title: 'articleEdit',
+			icon: 'persoanl',
+			noCache: true
 		},
-		{//文章编辑
+		children: [{
 			path: 'articleEdit',
+			name: 'articleEdit',
 			component: () =>
 				import('@/views/articleEdit/index'),
-			name: 'articleEdit',
 			meta: {
 				title: 'articleEdit',
 				icon: 'persoanl',
 				noCache: true
 			}
-		}
-    ]
-},
-    /**
-     *  404
-     **/
-    // {path: '*', redirect: '/404', hidden: true}
+		}]
+	},
+	// 	{ //文章编辑
+	// 		path: 'articleEdit',
+	// 		component: () =>
+	// 			import('@/views/articleEdit/index'),
+	// 		name: 'articleEdit',
+	// 		meta: {
+	// 			title: 'articleEdit',
+	// 			icon: 'persoanl',
+	// 			noCache: true
+	// 		}
+	// 	},
+	{ //文章单独编辑
+		path: '/aloneArticleEditIndex',
+		component: Layout,
+		name: 'aloneArticleEditIndex',
+		redirect: '/aloneArticleEditIndex/aloneArticleEdit',
+		hidden:true,
+		alwaysShow: true,
+		meta: {
+			title: 'aloneArticleEdit',
+			icon: 'persoanl',
+			noCache: true
+		},
+		children: [{
+			path: 'aloneArticleEdit',
+			name: 'aloneArticleEdit',
+			component: () =>
+				import('@/views/aloneArticleEdit/index'),
+			meta: {
+				title: 'aloneArticleEdit',
+				icon: 'persoanl',
+				noCache: true
+			}
+		}]
+	},
+// 	{ //文章单独编辑
+// 		path: 'aloneArticleEdit',
+// 		component: () =>
+// 			import('@/views/aloneArticleEdit/index'),
+// 		name: 'aloneArticleEdit',
+// 		hidden: true,
+// 		alwaysShow: true,
+// 		meta: {
+// 			title: 'aloneArticleEdit',
+// 			icon: 'persoanl',
+// 			noCache: true
+// 		}
+// 	},
+	/**
+	 *  404
+	 **/
+	// {path: '*', redirect: '/404', hidden: true}
 ];
 
 export default new VueRouter({
-    // mode: 'history', //后端支持可开
-    scrollBehavior: () => ({
-        y: 0
-    }),
-    routes: constantRouterMap
+	// mode: 'history', //后端支持可开
+	scrollBehavior: () => ({
+		y: 0
+	}),
+	routes: constantRouterMap
 })
 
 export const asyncRouterMap = []

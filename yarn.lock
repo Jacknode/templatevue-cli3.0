@@ -1287,6 +1287,11 @@ babel-plugin-dynamic-import-node@^2.2.0:
   dependencies:
     object.assign "^4.1.0"
 
+babel-plugin-transform-remove-strict-mode@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-remove-strict-mode/-/babel-plugin-transform-remove-strict-mode-0.0.2.tgz#913685aab95439f3a0ed88e588fbd5e997890579"
+  integrity sha1-kTaFqrlUOfOg7YjliPvV6ZeJBXk=
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/balanced-match/download/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -7222,6 +7227,11 @@ vue-template-compiler@^2.5.21:
 vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
+
+vue-ueditor-wrap@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/vue-ueditor-wrap/-/vue-ueditor-wrap-2.4.0.tgz#44b829f9bba0590a8f3d63b6c606a76de9d56463"
+  integrity sha512-c/ZtsrO+UI9JUwhGsKSRD2UIFT61mu1x4vSxmCKq8cpYm2Ah4cmUIaxY83MfwwtCa0xsqb2PrBTkbHY2LOwcuw==
 
 vue@^2.5.21:
   version "2.6.10"

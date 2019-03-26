@@ -34,6 +34,7 @@ function filterAsyncRouter(asyncRouterMap, roles) {
 
 const permission = {
   state: {
+		PersonalInfo:{},
     routers: constantRouterMap,
     addRouters: [],
     asyncRouterMap:[],
@@ -44,6 +45,9 @@ const permission = {
       state.addRouters = routers
       state.routers = constantRouterMap.concat(routers)
     },
+		setPersonalInfo(state,obj){
+			state.PersonalInfo=obj;
+		},
     setRoute(state){
       state.isGenerateRoutes = true;
       switch (1) {

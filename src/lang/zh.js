@@ -7,6 +7,7 @@ export default {
     introduction: '简述',
     documentation: '文档',
     guide: '引导页',
+		aloneArticleEdit:'发文章',
     VendorInformation:'供应商信息',
     productLine:'产品线路信息',
     ProductLineManagement:'产品线路',

@@ -66,7 +66,7 @@
     mounted () {
       this.editor = new Editor(`#${this.editorId}`)
       this.editor.customConfig.onchange = (html) => {
-        this.$emit('input',escape(html))
+        this.$emit('input',html)
       }
       this.editor.customConfig.onchangeTimeout = this.changeInterval
 
