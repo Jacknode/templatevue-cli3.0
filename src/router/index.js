@@ -102,10 +102,10 @@ export const constantRouterMap = [{
 			path: 'articleEdit',
 			name: 'articleEdit',
 			component: () =>
-				import('@/views/articleEdit/index'),
+				import('@/views/editWrap/articleEdit/index'),
 			meta: {
 				title: 'articleEdit',
-				icon: 'persoanl',
+				icon: 'edit',
 				noCache: true
 			}
 		}]
@@ -137,7 +137,7 @@ export const constantRouterMap = [{
 			path: 'aloneArticleEdit',
 			name: 'aloneArticleEdit',
 			component: () =>
-				import('@/views/aloneArticleEdit/index'),
+				import('@/views/editWrap/aloneArticleEdit/index'),
 			meta: {
 				title: 'aloneArticleEdit',
 				icon: 'persoanl',
@@ -145,19 +145,30 @@ export const constantRouterMap = [{
 			}
 		}]
 	},
-// 	{ //文章单独编辑
-// 		path: 'aloneArticleEdit',
-// 		component: () =>
-// 			import('@/views/aloneArticleEdit/index'),
-// 		name: 'aloneArticleEdit',
-// 		hidden: true,
-// 		alwaysShow: true,
-// 		meta: {
-// 			title: 'aloneArticleEdit',
-// 			icon: 'persoanl',
-// 			noCache: true
-// 		}
-// 	},
+	{ //文章修改
+		path: '/UpdataIndex',
+		component: Layout,
+		name: 'UpdataIndex',
+		redirect: '/UpdataIndex/Updata',
+		hidden:true,
+		alwaysShow: true,
+		meta: {
+			title: 'Updata',
+			icon: 'persoanl',
+			noCache: true
+		},
+		children: [{
+			path: 'Updata',
+			name: 'Updata',
+			component: () =>
+				import('@/views/editWrap/Updata/index'),
+			meta: {
+				title: 'Updata',
+				icon: 'persoanl',
+				noCache: true
+			}
+		}]
+	},
 	/**
 	 *  404
 	 **/

@@ -34,7 +34,7 @@ function filterAsyncRouter(asyncRouterMap, roles) {
 
 const permission = {
   state: {
-		PersonalInfo:{},
+      modify:{},
     routers: constantRouterMap,
     addRouters: [],
     asyncRouterMap:[],
@@ -45,9 +45,9 @@ const permission = {
       state.addRouters = routers
       state.routers = constantRouterMap.concat(routers)
     },
-		setPersonalInfo(state,obj){
-			state.PersonalInfo=obj;
-		},
+    setPersonalInfo(state, obj) {//存取文章详情
+      state.modify = obj;
+    },
     setRoute(state){
       state.isGenerateRoutes = true;
       switch (1) {

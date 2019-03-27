@@ -3,12 +3,13 @@ export default {
     dashboard: 'Dashboard',
     myPersonal:'myPersonal',
     articleEdit:'articleEdit',
+    aloneArticleEdit:'',
+    Updata:'',
 
     introduction: 'Introduction',
     documentation: 'Documentation',
     guide: 'Guide',
     travel:'Travel',
-		aloneArticleEdit:'',
     AdminQueryUserOrder: 'Admin Query User Order',
 
 

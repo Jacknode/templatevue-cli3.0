@@ -98,10 +98,24 @@ const user = {
                     })
             })
         },
-        //文章编辑
+        //文章添加
         articleEdit({commit}, data) {
             return new Promise((relove, reject) => {
                 axios.post(str + '/content/add', data)
+                    .then(data => {
+                        var data = data.data;
+                        if (Number(data.code) == 10000) {
+                            relove(data.message);
+                        } else {
+                            reject(data.message);
+                        }
+                    })
+            })
+        },
+        //文章修改
+        UpdataEdit({commit}, data) {
+            return new Promise((relove, reject) => {
+                axios.post(str + '/content/edit', data)
                     .then(data => {
                         var data = data.data;
                         if (Number(data.code) == 10000) {

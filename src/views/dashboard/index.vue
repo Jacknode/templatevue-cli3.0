@@ -34,7 +34,7 @@
                 formData.append('token', this.userInfo.token);
                 this.$store.dispatch('myProfit', formData)
                     .then(data => {
-                        console.log(data, 123)
+                        // console.log(data, 123)
                     })
             },
         }
