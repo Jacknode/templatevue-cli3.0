@@ -8,8 +8,8 @@
         </p>
         <!-- 数据展示 -->
 
-        <el-table :data="wordList" style="width: 100%">
-            <el-table-column prop="title" label="标题">
+        <el-table :data="wordList" style="width: 100%;" :highlight-current-row="true">
+            <el-table-column prop="title" label="标题" fixed>
             </el-table-column>
             <el-table-column prop="type_cn" label="类型">
             </el-table-column>
@@ -46,7 +46,7 @@
         <el-dialog title="文章详情" :visible.sync="addDialog" :close-on-click-modal="false" width="60%">
             <el-form ref="form" :model="addOptions" label-width="60px" class="detailsList">
                 <el-form-item label="分类:">
-                    <div class="details">{{articleDetails.type_cn}}</div>
+                    <div class="details"  style="min-height:40px;">{{articleDetails.type_cn}}</div>
                 </el-form-item>
                 <el-form-item label="标题:">
                     <div class="details">{{articleDetails.title}}</div>
@@ -183,7 +183,6 @@
                     .then(data => {
                         this.articleDetails = data;
                         this.addDialog = true;
-                        // console.log(data)
                         // detailsDialog = true;
                     }, err => {
 
@@ -233,5 +232,6 @@
         border-radius: 4px;
         box-shadow: 1px 1px 15px 0 #ccc;
     }
+
 
 </style>

@@ -66,7 +66,12 @@
 			this.addOptions.uid = this.userInfo.uid;
 			this.addOptions.token = this.userInfo.token;
 			// this.initInfo=this.modify;
-			this.initInfo=JSON.parse(sessionStorage.getItem('initInfo'));
+			if(this.modify.uid){
+				this.initInfo=this.modify;
+			}else{
+				this.initInfo=JSON.parse(sessionStorage.getItem('initInfo'));
+			}
+			// this.initInfo=JSON.parse(sessionStorage.getItem('initInfo'));
 			this.getArticleClass();
 		},
 		components: {

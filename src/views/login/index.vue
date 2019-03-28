@@ -94,7 +94,7 @@
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
                         this.loading = true;
-                        var formData = new FormData()
+                        var formData = new FormData();
                         formData.append('username', this.loginForm.username)
                         formData.append('password', this.loginForm.password)
                         formData.append('checkcode', this.loginForm.checkcode)
