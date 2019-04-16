@@ -50,7 +50,9 @@
                 code: '',
                 type: 'password',
                 loginForm: {
-                    username: '15877777777',
+                    // username: '15877777777',
+                    username: '15811111111',
+                    // username: '18700000000',
                     password: '123456',
                     checkcode: '1'
                 },
@@ -98,8 +100,9 @@
                         formData.append('username', this.loginForm.username)
                         formData.append('password', this.loginForm.password)
                         formData.append('checkcode', this.loginForm.checkcode)
-                        this.$store.dispatch('Login', formData).then((data) => {
-							sessionStorage.setItem('userInfo',JSON.stringify(data))
+                        this.$store.dispatch('Login', formData)
+                            .then((data) => {
+                                sessionStorage.setItem('userInfo',JSON.stringify(data))
                             this.$router.push({name: 'dashboard'});
 							this.$message({
                                 message:data.message,

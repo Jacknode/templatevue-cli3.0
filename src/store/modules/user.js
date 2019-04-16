@@ -89,6 +89,7 @@ const user = {
             return new Promise((relove, reject) => {
                 axios.post(str + '/content/del', data)
                     .then(data => {
+                        console.log(data)
                         var data = data.data;
                         if (Number(data.code) == 10000) {
                             relove(data);

@@ -16,7 +16,7 @@
 
 	  <el-table-column
 	  align='center'
-	    prop="sex"
+	    prop="sexs"
 	    label="性别">
 	  </el-table-column>
       <el-table-column
@@ -47,6 +47,11 @@
 				formData.append('token',this.userInfo.token);
 				this.$store.dispatch('myPersonal',formData)
 				.then(data=>{
+					if(data.data.sex==0){
+						data.data.sexs='男'
+					}else{
+						data.data.sexs='女'
+					}
 					console.log(data)
 					this.lawyerInfo=[data.data];
 				})

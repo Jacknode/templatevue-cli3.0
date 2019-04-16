@@ -57,6 +57,10 @@ Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
 
+
+import VCharts from 'v-charts'//echarts调用
+// Vue.use(VCharts)
+
 new Vue({
   el: '#app',
   router,

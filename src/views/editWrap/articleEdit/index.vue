@@ -202,6 +202,7 @@
                 formData.append('token', this.addOptions.token);
                 formData.append('id', id);
                 this.$store.dispatch('deleteData', formData).then(data => {
+                    console.log(data)
                         this.$message({
                             message: data.message,
                             type: 'success'
@@ -210,7 +211,7 @@
                         this.deleteDialog = false;
                     }, err => {
 					    this.$message({
-                            message:data.message,
+                            message:err,
                             type:'warning'
                         })
                     }
@@ -218,6 +219,7 @@
             },
             //获取ID删除
             getId(id) {
+                console.log(id)
                 this.deleteId = id;
                 this.deleteDialog = true;
             },
