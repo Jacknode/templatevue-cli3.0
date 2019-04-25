@@ -103,6 +103,7 @@
                         this.$store.dispatch('Login', formData)
                             .then((data) => {
                                 sessionStorage.setItem('userInfo',JSON.stringify(data))
+                                sessionStorage.setItem('token',data.token)
                             this.$router.push({name: 'dashboard'});
 							this.$message({
                                 message:data.message,

@@ -21,9 +21,9 @@ import { getToken } from '@/utils/auth'
 import * as filters from './filters'
 import i18n from './lang'
 Vue.use(VueLazyLoad,{
-  error:'../static/img/error.jpg',
+  error:'http://hly.1000da.com.cn/assets/img/error.jpg',
   dispatchEvent:true,
-  loading:'../static/img/loading.gif',
+  loading:'http://hly.1000da.com.cn/assets/img/loading.gif',
 });
 // 遍历所有导出的过滤器并添加到全局过滤器
 Object.keys(filters).forEach((key) => {
@@ -33,24 +33,20 @@ Object.keys(filters).forEach((key) => {
 import '@/icons' // icon
 // import '@/permission' // permission control
 Vue.use(uploader)
-// axios.interceptors.request.use(function (config) {  //配置发送请求的信息\
-//   // let token =  getToken()
-//   // if(token){
-//   //   config.headers.Authorization = getToken()
-//   // }
-//   config.headers.Authorization = getToken()
-//   // config.headers['token'] = getToken()
-//
-//   return config;
-// }, function (error) {
-//   return Promise.reject(error);
-// });
-// axios.interceptors.response.use(function (response) { //配置请求回来的信息
-//   return response;
-// }, function (error) {
-//
-//   return Promise.reject(error);
-// });
+axios.interceptors.request.use(function (config) {  //配置发送请求的信息\
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+axios.interceptors.response.use(function (response) { //配置请求回来的信息
+    if(response.code==10001){
+        router.push({name:'Login'})
+    }
+  return response;
+}, function (error) {
+
+  return Promise.reject(error);
+});
 
 Vue.use(ELEMENT, ELEMENT.lang.zhCN)
 Vue.prototype.$http = axios;
@@ -65,7 +61,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  filters,
   i18n,
   template: '<App/>',
   components: { App }
