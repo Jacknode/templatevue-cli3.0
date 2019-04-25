@@ -104,12 +104,18 @@
 					var text = data.info.replace(/<[^<>]+>/g, ""); //截取JSON标签里的内容
 					// console.log(text.trim())去掉首尾空格
 					let arry = (text.trim()).split(' ');
-					for (let i = 0; i < arry.length; i++) {
-						this.optionsList.push({
-							value: i+1,
-							label: arry[i]
-						})
-					}
+					// for (let i = 0; i < arry.length; i++) {
+					// 	this.optionsList.push({
+					// 		value: i+1,
+					// 		label: arry[i]
+					// 	})
+					// }
+					this.optionsList.push(
+							{value:1,label:'公司'},
+							{value:2,label:'合同'},
+							{value:114,label:'婚姻'},
+							{value:115,label:'刑事'},
+					)
 				})
 			},
 		},
