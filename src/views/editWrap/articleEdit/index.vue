@@ -9,24 +9,25 @@
         <!-- 数据展示 -->
 
         <el-table :data="wordList" style="width: 100%;" :highlight-current-row="true">
-            <el-table-column prop="title" label="标题" fixed>
+            <el-table-column prop="title" label="标题" fixed width="300">
             </el-table-column>
-            <el-table-column prop="type_cn" label="类型">
+            <el-table-column prop="type_cn" label="类型" width="120">
             </el-table-column>
-            <el-table-column prop="describe" label="描述">
-            </el-table-column>
+            <!--<el-table-column prop="describe" label="描述">-->
+            <!--</el-table-column>-->
             <el-table-column prop="content" label="内容">
                 <template slot-scope="scope">
                     <div v-html="scope.row.content"
-                         style="max-height:100px;overflow: hidden;text-overflow:ellipsis;width:100%;white-space:nowrap;"></div>
+                         style="max-height:80px;-webkit-box-orient: vertical;
+                         overflow: hidden;text-overflow:ellipsis;width:100%;-webkit-line-clamp:3;display: -webkit-box;"></div>
                 </template>
             </el-table-column>
-            <el-table-column label="发表时间">
+            <el-table-column label="发表时间" width="200">
                 <template slot-scope="scope">
                     {{scope.row.add_time*1000 | getAddTime}}
                 </template>
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="220" >
                 <template slot-scope="scope">
                     <el-button size="mini" type="success" @click.stop="searchDetails(scope.row.id)">详 情</el-button>
                     <el-button size="mini" @click.stop="Update(scope.row)" type="warning">修 改</el-button>
@@ -131,6 +132,8 @@
                     .then(data => {
                         this.total = Number(data.count);
                         this.wordList = data.list;
+                        console.log(data)
+
                     }, err => {
                         this.$message({
                             message: err,
@@ -140,12 +143,6 @@
             },
             //添加
             Add() {
-// 				for (let attr in this.addOptions) {
-// 					this.addOptions[attr] = '';
-// 				}
-// 				this.addOptions.uid = this.userInfo.uid;
-// 				this.addOptions.token = this.userInfo.token;
-// 				this.addDialog = true;
                 this.$router.push({name: 'aloneArticleEdit'})
             },
             //添加提交
@@ -202,7 +199,6 @@
                 formData.append('token', this.addOptions.token);
                 formData.append('id', id);
                 this.$store.dispatch('deleteData', formData).then(data => {
-                    console.log(data)
                         this.$message({
                             message: data.message,
                             type: 'success'
@@ -229,10 +225,10 @@
 
 <style scoped>
     .detailsList .details {
-        border: 1px solid #ccc;
+        border: 1px solid #ddd;
         padding: 0 20px;
         border-radius: 4px;
-        box-shadow: 1px 1px 15px 0 #ccc;
+        box-shadow: 1px 1px 35px 0 #ddd;
     }
 
 

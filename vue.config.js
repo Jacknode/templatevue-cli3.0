@@ -16,7 +16,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://cs.xhfwy.com/public/index.php',
+        target: 'https://xhfwy3.sanhedao.com.cn/public/index.php/client/v3',
         changeOrigin: true,
         ws: true,
         pathRewrite: {

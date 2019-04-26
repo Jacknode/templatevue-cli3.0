@@ -39,12 +39,11 @@ axios.interceptors.request.use(function (config) {  //配置发送请求的信�
   return Promise.reject(error);
 });
 axios.interceptors.response.use(function (response) { //配置请求回来的信息
-    if(response.code==10001){
+    if(response.data.code==10101){
         router.push({name:'Login'})
     }
   return response;
 }, function (error) {
-
   return Promise.reject(error);
 });
 

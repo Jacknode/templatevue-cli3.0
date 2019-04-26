@@ -1,4 +1,5 @@
-const str = 'http://cs.xhfwy.com/public/index.php/client/v3';
+// const str = 'http://cs.xhfwy.com/public/index.php/client/v3';
+const str = 'https://xhfwy3.sanhedao.com.cn/public/index.php/client/v3';
 
 import {
     login
@@ -136,6 +137,7 @@ const user = {
                         if (Number(data.code) == 10000) {
                             relove(data.data);
                         } else {
+                            console.log(data)
                             reject(data.message);
                         }
                     })

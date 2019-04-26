@@ -30,7 +30,9 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        // , serverUrl: URL + "php/controller.php"/api
+        // , serverUrl: URL + "php/controller.php"
+		// , serverUrl: "http://fy.page.sanhedao.com.cn/UEditor/php/controller.php"
+		, serverUrl: "https://xhfwy3.sanhedao.com.cn/supplier/UEditor/php/controller.php"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
@@ -41,9 +43,9 @@
             'directionalityltr', 'directionalityrtl', 'indent', '|',
             'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
             'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage','emotion','scrawl', 'insertvideo', 'music', 'attachment'
+            'simpleupload', 'insertimage','scrawl', 'attachment'
         ]]
-		//'emotion'表情
+		//'emotion'表情 , 'insertvideo'//视频  'music'//音乐
 
 
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
