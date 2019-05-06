@@ -130,10 +130,9 @@
                 formData.append('count', 10);
                 this.$store.dispatch('articleList', formData) //获取列表数据
                     .then(data => {
+                        console.log(data)
                         this.total = Number(data.count);
                         this.wordList = data.list;
-                        console.log(data)
-
                     }, err => {
                         this.$message({
                             message: err,

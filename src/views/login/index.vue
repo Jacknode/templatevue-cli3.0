@@ -51,10 +51,10 @@
                 type: 'password',
                 loginForm: {
                     // username: '15877777777',
-                    username: '15811111111',
+                    username: '',
                     // username: '18700000000',
-                    password: '123456',
-                    checkcode: '1'
+                    password: '',
+                    checkcode: ''
                 },
                 loginRules: {
                     username: [{required: true, message: '请输入账号', trigger: 'blur'}],
