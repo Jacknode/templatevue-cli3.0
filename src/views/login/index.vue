@@ -7,7 +7,9 @@
 				<span class="svg-container svg-container_login">
 					<svg-icon icon-class="user"/>
 				</span>
-                <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="请输入手机号"></el-input>
+                    <el-input type="text"
+                              oninput="if(value.length>11)value=value.slice(0,11)"
+                              v-model="loginForm.username" auto-complete="off" placeholder="请输入手机号"></el-input>
 
                 <!--<el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />-->
             </el-form-item>
@@ -140,13 +142,14 @@
     $bg: #2d3a4b;
     $light_gray: #eee;
     .code {
-        height: 50px;
+        height: 55px;
     }
     .code input {
         outline: none;
         border: 1px solid #454545;
         width: 50%;
-        font: 14px/50px '微软雅黑';
+        height:52px;
+        font: 14px/52px '微软雅黑';
         padding: 0 12px;
         color: #fff;
         background-color: rgba(0, 0, 0, .1);

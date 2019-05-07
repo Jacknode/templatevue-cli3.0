@@ -9,25 +9,32 @@
         <!-- 数据展示 -->
 
         <el-table :data="wordList" style="width: 100%;" :highlight-current-row="true">
-            <el-table-column prop="title" label="标题" fixed width="300">
+            <el-table-column prop="title" label="标题" fixed width="200" align="center">
             </el-table-column>
-            <el-table-column prop="type_cn" label="类型" width="120">
+            <el-table-column prop="type_cn" label="类型" width="50" align="center">
             </el-table-column>
             <!--<el-table-column prop="describe" label="描述">-->
             <!--</el-table-column>-->
-            <el-table-column prop="content" label="内容">
+            <el-table-column prop="content" label="内容" align="center">
                 <template slot-scope="scope">
-                    <div v-html="scope.row.content"
-                         style="max-height:80px;-webkit-box-orient: vertical;
+                    <div v-html="scope.row.content" id="contentP"
+                         style="max-height:70px;-webkit-box-orient: vertical;
                          overflow: hidden;text-overflow:ellipsis;width:100%;-webkit-line-clamp:3;display: -webkit-box;"></div>
                 </template>
             </el-table-column>
-            <el-table-column label="发表时间" width="200">
+            <el-table-column label="发表时间" width="100" align="center">
                 <template slot-scope="scope">
                     {{scope.row.add_time*1000 | getAddTime}}
                 </template>
             </el-table-column>
-            <el-table-column label="操作" width="220" >
+            <el-table-column label="审核状态" width="80" align="center">
+                <template slot-scope="scope">
+                    <span class="HavePassed2" v-if="scope.row.review_status==0">待审核</span>
+                    <span class="HavePassed" v-else-if="scope.row.review_status=1">已通过</span>
+                    <span class="HavePassed3" v-else-if="scope.row.review_status=2">未通过</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" width="260" align="center">
                 <template slot-scope="scope">
                     <el-button size="mini" type="success" @click.stop="searchDetails(scope.row.id)">详 情</el-button>
                     <el-button size="mini" @click.stop="Update(scope.row)" type="warning">修 改</el-button>
@@ -125,7 +132,7 @@
                 let formData = new FormData();
                 formData.append('uid', this.userInfo.uid);
                 formData.append('token', this.userInfo.token);
-                formData.append('type', this.userInfo.type);
+                // formData.append('type', this.userInfo.type);
                 formData.append('page', this.pageNum);
                 formData.append('count', 10);
                 this.$store.dispatch('articleList', formData) //获取列表数据
@@ -229,6 +236,16 @@
         border-radius: 4px;
         box-shadow: 1px 1px 35px 0 #ddd;
     }
-
-
+    .HavePassed{
+        color:green;
+        font-weight:bold;
+    }
+    .HavePassed2{
+        color:#97a8be;
+        font-weight:bold;
+    }
+    .HavePassed3{
+        color:#97a8be;
+        font-weight:bold;
+    }
 </style>
