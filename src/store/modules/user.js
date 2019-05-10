@@ -130,15 +130,14 @@ const user = {
         },
         //文章列表
         articleList({commit}, data) {
-            return new Promise((relove, reject) => {
+            return new Promise((rselove, rejsect) => {
                 axios.post(str + '/content/showall', data)
                     .then(data => {
                         var data = data.data;
                         if (Number(data.code) == 10000) {
-                            relove(data.data);
+                            rselove(data.data);
                         } else {
-                            console.log(data)
-                            reject(data.message);
+                            rejsect(data.message);
                         }
                     })
             })

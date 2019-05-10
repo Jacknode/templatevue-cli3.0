@@ -30,8 +30,11 @@
             <el-table-column label="审核状态" width="80" align="center">
                 <template slot-scope="scope">
                     <span class="HavePassed2" v-if="scope.row.review_status==0">待审核</span>
-                    <span class="HavePassed" v-else-if="scope.row.review_status=1">已通过</span>
-                    <span class="HavePassed3" v-else-if="scope.row.review_status=2">未通过</span>
+                    <span class="HavePassed" v-else-if="scope.row.review_status==1">已通过</span>
+                    <span class="HavePassed3" v-else-if="scope.row.review_status==2">
+                        已驳回
+                        <i class="Reject">{{scope.row.reason}}</i>
+                    </span>
                 </template>
             </el-table-column>
             <el-table-column label="操作" width="260" align="center">
@@ -137,7 +140,6 @@
                 formData.append('count', 10);
                 this.$store.dispatch('articleList', formData) //获取列表数据
                     .then(data => {
-                        console.log(data)
                         this.total = Number(data.count);
                         this.wordList = data.list;
                     }, err => {
@@ -245,7 +247,11 @@
         font-weight:bold;
     }
     .HavePassed3{
-        color:#97a8be;
+        color:red;
         font-weight:bold;
+    }
+    .HavePassed3 .Reject {
+        font-style: normal;
+        color: #97a8be;
     }
 </style>
