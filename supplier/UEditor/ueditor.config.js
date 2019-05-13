@@ -32,7 +32,7 @@
         // 服务器统一请求接口路径
         // , serverUrl: URL + "php/controller.php"
 		// , serverUrl: "http://fy.page.sanhedao.com.cn/UEditor/php/controller.php"http://mp.xhfwy.com/supplier/UEditor/php/controller.php
-		, serverUrl: "https://mp.xhfwy.com/supplier/UEditor/php/controller.php"
+		, serverUrl: "https://mp.xhfwy.com/UEditor/php/controller.php"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
@@ -43,7 +43,7 @@
             'directionalityltr', 'directionalityrtl', 'indent', '|',
             'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
             'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage','scrawl', 'attachment'
+            'simpleupload', 'insertimage','insertvideo','scrawl', 'attachment'
         ]]
 		//'emotion'表情 , 'insertvideo'//视频  'music'//音乐
 
@@ -364,7 +364,7 @@
 		//output xss过滤
 		,outputXssFilter: true
 		// xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
-		,whitList: {
+		,whiteList: {
 			a:      ['target', 'href', 'title', 'class', 'style'],
 			abbr:   ['title', 'class', 'style'],
 			address: ['class', 'style'],
@@ -402,7 +402,7 @@
 			header: [],
 			hr:     [],
 			i:      ['class', 'style'],
-			img:    ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex'],
+			img:    ['src', 'alt', 'title', 'width', 'height', 'id', '_src','_url', 'loadingclass', 'class', 'data-latex','style'],
 			ins:    ['datetime'],
 			li:     ['class', 'style'],
 			mark:   [],
@@ -427,7 +427,11 @@
 			tt:     [],
 			u:      [],
 			ul:     ['class', 'style'],
-			video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style']
+			video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width', 'class', 'style'],
+			source: ['src', 'type'],
+			embed: ['type', 'class', 'pluginspage', 'src', 'width', 'height', 'align', 'style', 'wmode', 'play',
+				'loop', 'menu', 'allowscriptaccess', 'allowfullscreen'],
+			iframe : ['class' , 'style' , 'src', 'frameborder', 'width', 'height'],
 		}
     };
 

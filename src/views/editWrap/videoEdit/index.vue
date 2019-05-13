@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="title">
-            <span>文章发布</span>
+            <span>视频发布</span>
         </div>
         <p>
             <el-button type="primary" @click="Add()">添 加</el-button>
@@ -214,7 +214,7 @@
                         this.initData();
                         this.deleteDialog = false;
                     }, err => {
-					    this.$message({
+                        this.$message({
                             message:err,
                             type:'warning'
                         })

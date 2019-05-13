@@ -110,6 +110,28 @@ export const constantRouterMap = [{
 			}
 		}]
 	},
+	{ //视频编辑
+		path: '/videoEditIndex',
+		component: Layout,
+		name: 'videoEditIndex',
+		redirect: '/videoEditIndex/videoEdit',
+		meta: {
+			title: 'videoEdit',
+			icon: 'persoanl',
+			noCache: true
+		},
+		children: [{
+			path: 'videoEdit',
+			name: 'videoEdit',
+			component: () =>
+				import('@/views/editWrap/videoEdit/index'),
+			meta: {
+				title: 'videoEdit',
+				icon: 'edit',
+				noCache: true
+			}
+		}]
+	},
 	// 	{ //文章编辑
 	// 		path: 'articleEdit',
 	// 		component: () =>

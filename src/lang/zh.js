@@ -3,8 +3,9 @@ export default {
     dashboard: '首页',
     myPersonal:'个人信息',
     articleEdit:'文章编辑',
-    aloneArticleEdit:'发布文章',
+    aloneArticleEdit:'发布文章或视频',
     Updata:'修改文章',
+    videoEdit:'视频编辑',
 
 
     introduction: '简述',

@@ -65,6 +65,7 @@
 			this.addOptions.uid = this.userInfo.uid;
 			this.addOptions.token = this.userInfo.token;
 			this.getArticleClass();
+			console.log(VueUeditorWrap,123);
 		},
 		components: {
 			VueUeditorWrap
@@ -111,8 +112,6 @@
 							label: arry[i]
 						})
 					}
-					console.log(data)
-
 					// this.optionsList.push(
 					// 		{value:1,label:'公司'},
 					// 		{value:2,label:'合同'},

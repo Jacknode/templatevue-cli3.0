@@ -3,8 +3,9 @@ export default {
     dashboard: 'Dashboard',
     myPersonal:'myPersonal',
     articleEdit:'articleEdit',
-    aloneArticleEdit:'',
-    Updata:'',
+    aloneArticleEdit:'aloneArticleEdit',
+    Updata:'Updata',
+    videoEdit:'videoEdit',
 
     introduction: 'Introduction',
     documentation: 'Documentation',

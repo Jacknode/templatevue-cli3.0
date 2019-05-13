@@ -18,6 +18,18 @@
         initTabs();
         initVideo();
         initUpload();
+        var tabs = $G('tabHeads').children;
+        var j, bodyId, target = tabs[1];
+        for (j = 0; j < tabs.length; j++) {
+            bodyId = tabs[j].getAttribute('data-content-id');
+            if(tabs[j] == target){
+                domUtils.addClass(tabs[j], 'focus');
+                domUtils.addClass($G(bodyId), 'focus');
+            }else {
+                domUtils.removeClasses(tabs[j], 'focus');
+                domUtils.removeClasses($G(bodyId), 'focus');
+            }
+        }
     };
 
     /* 初始化tab标签 */
