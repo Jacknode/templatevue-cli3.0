@@ -88,7 +88,7 @@ export const constantRouterMap = [{
 			}
 		}]
 	},
-	{ //文章编辑
+	{ //文章列表
 		path: '/articleEditIndex',
 		component: Layout,
 		name: 'articleEditIndex',
@@ -110,7 +110,7 @@ export const constantRouterMap = [{
 			}
 		}]
 	},
-	{ //视频编辑
+	{ //视频列表
 		path: '/videoEditIndex',
 		component: Layout,
 		name: 'videoEditIndex',
@@ -143,6 +143,30 @@ export const constantRouterMap = [{
 	// 			noCache: true
 	// 		}
 	// 	},
+	{ //视频单独编辑
+		path: '/aloneVideoEditIndex',
+		component: Layout,
+		name: 'aloneVideoEditIndex',
+		redirect: '/aloneVideoEditIndex/aloneVideoEdit',
+		hidden:true,
+		alwaysShow: true,
+		meta: {
+			title: 'aloneVideoEdit',
+			icon: 'persoanl',
+			noCache: true
+		},
+		children: [{
+			path: 'aloneVideoEdit',
+			name: 'aloneVideoEdit',
+			component: () =>
+				import('@/views/editWrap/aloneVideoEdit/index'),
+			meta: {
+				title: 'aloneVideoEdit',
+				icon: 'persoanl',
+				noCache: true
+			}
+		}]
+	},
 	{ //文章单独编辑
 		path: '/aloneArticleEditIndex',
 		component: Layout,
@@ -186,6 +210,30 @@ export const constantRouterMap = [{
 				import('@/views/editWrap/Updata/index'),
 			meta: {
 				title: 'Updata',
+				icon: 'persoanl',
+				noCache: true
+			}
+		}]
+	},
+	{ //视频修改
+		path: '/videoUpDataIndex',
+		component: Layout,
+		name: 'videoUpDataIndex',
+		redirect: '/videoUpDataIndex/videoUpData',
+		hidden:true,
+		alwaysShow: true,
+		meta: {
+			title: 'videoUpData',
+			icon: 'persoanl',
+			noCache: true
+		},
+		children: [{
+			path: 'videoUpData',
+			name: 'videoUpData',
+			component: () =>
+				import('@/views/editWrap/videoUpData/index'),
+			meta: {
+				title: 'videoUpData',
 				icon: 'persoanl',
 				noCache: true
 			}

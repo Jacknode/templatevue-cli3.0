@@ -13,20 +13,25 @@
             <el-form-item label="描述:">
                 <el-input v-model="addOptions.describe" placeholder="请输入"></el-input>
             </el-form-item>
-            <el-form-item label="内容:">
-                <vue-ueditor-wrap v-model="addOptions.content" :config="myConfig"></vue-ueditor-wrap>
+            <el-form-item label="封面图上传:">
+                <input @change="fileImage" type="file" name="thumbnail" accept="image/jpeg,image/x-png,image/gif" value=""/>
             </el-form-item>
+            <el-form-item label="视频上传:">
+                <!--<input @change="fileVideo" type="file" name="video" accept="audio/mp4,video/mp4" value=""/>-->
+                <el-input v-model="videos" placeholder="请输入地址"></el-input>
+            </el-form-item>
+
         </el-form>
         <span slot="footer" class="dialog-footer" style="margin-left:40%;">
             <el-button @click="$router.go(-1)" type="warning" style="margin-right:50px;">返 回</el-button>
-			<el-button type="primary" @click="addSubmit()">提 交</el-button>
+            <el-button type="primary" @click="uploadVideo()">提 交</el-button>
 		</span>
         <!-- <vue-ueditor-wrap v-model="content" :config="myConfig"></vue-ueditor-wrap> -->
     </div>
 </template>
 
 <script>
-    import VueUeditorWrap from 'vue-ueditor-wrap' // ES6 Module
+    // import VueUeditorWrap from 'vue-ueditor-wrap' // ES6 Module
     export default {
         data() {
             return {
@@ -43,19 +48,19 @@
                     content: '',
                 },
                 // content: '',
-                myConfig: {
-                    // 编辑器不自动被内容撑高
-                    autoHeightEnabled: false,
-                    // 初始容器高度
-                    initialFrameHeight: 540,
-                    // 初始容器宽度
-                    initialFrameWidth: '100%',
-                    // 上传文件接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
-                    // serverUrl: 'http://35.201.165.105:8000/controller.php',
-                    // UEditor 资源文件的存放路径，如果你使用的是 vue-cli 生成的项目，通常不需要设置该选项，vue-ueditor-wrap 会自动处理常见的情况，如果需要特殊配置，参考下方的常见问题2
-                    UEDITOR_HOME_URL: '/UEditor/'
-                    ///supplier/
-                },
+                // myConfig: {
+                //     // 编辑器不自动被内容撑高
+                //     autoHeightEnabled: false,
+                //     // 初始容器高度
+                //     initialFrameHeight: 540,
+                //     // 初始容器宽度
+                //     initialFrameWidth: '100%',
+                //     // 上传文件接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
+                //     // serverUrl: 'http://35.201.165.105:8000/controller.php',
+                //     // UEditor 资源文件的存放路径，如果你使用的是 vue-cli 生成的项目，通常不需要设置该选项，vue-ueditor-wrap 会自动处理常见的情况，如果需要特殊配置，参考下方的常见问题2
+                //     UEDITOR_HOME_URL: '/UEditor/'
+                //     ///supplier/
+                // },
             }
         },
         created() {
@@ -67,10 +72,45 @@
             this.addOptions.token = this.userInfo.token;
             this.getArticleClass();
         },
-        components: {
-            VueUeditorWrap
-        },
+        // components: {
+        //     VueUeditorWrap
+        // },
         methods: {
+            fileImage(e) {
+                var file = e.target.files[0];
+                this.thumbnail = file;
+                // console.log(file)
+            },
+            // fileVideo(e) {
+            //     var file = e.target.files[0];
+            //     this.videos = file;
+            //     // console.log(file)
+            // },
+            //视频上传
+            uploadVideo() {
+                let formData = new FormData();
+                formData.append('type', this.addOptions.type);
+                formData.append('title', this.addOptions.title);
+                formData.append('describe', this.addOptions.describe);
+                formData.append('thumbnail', this.thumbnail);
+                formData.append('path', this.videos);
+                formData.append('token', this.addOptions.token);
+                formData.append('uid', this.addOptions.uid);
+
+                this.$store.dispatch('uploadVideo', formData)
+                    .then(success => {
+                        this.$message({
+                            message:success,
+                            type:'success'
+                        })
+                        this.$router.push({name: 'videoEdit'})
+                    },err=>{
+                        this.$message({
+                            message:err,
+                            type:'error'
+                        })
+                    })
+            },
             //添加提交
             addSubmit() {
                 let formData = new FormData();

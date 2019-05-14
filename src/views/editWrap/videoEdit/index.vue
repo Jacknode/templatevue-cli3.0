@@ -15,9 +15,9 @@
             </el-table-column>
             <!--<el-table-column prop="describe" label="描述">-->
             <!--</el-table-column>-->
-            <el-table-column prop="content" label="内容" align="center">
+            <el-table-column prop="content" label="视频地址" align="center">
                 <template slot-scope="scope">
-                    <div v-html="scope.row.content" id="contentP"
+                    <div v-html="scope.row.path" id="contentP"
                          style="max-height:70px;-webkit-box-orient: vertical;
                          overflow: hidden;text-overflow:ellipsis;width:100%;-webkit-line-clamp:3;display: -webkit-box;"></div>
                 </template>
@@ -40,8 +40,8 @@
             <el-table-column label="操作" width="260" align="center">
                 <template slot-scope="scope">
                     <el-button size="mini" type="success" @click.stop="searchDetails(scope.row.id)">详 情</el-button>
-                    <el-button size="mini" @click.stop="Update(scope.row)" type="warning">修 改</el-button>
-                    <el-button size="mini" type="danger" @click="getId(scope.row.id)">删 除</el-button>
+                    <el-button size="mini" @click.stop="Update(scope.row)" type="warning" v-if="scope.row.review_status==0||scope.row.review_status==2">修 改</el-button>
+                    <el-button size="mini" type="danger" @click="getId(scope.row.id)" v-if="scope.row.review_status==0||scope.row.review_status==2">删 除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -55,7 +55,7 @@
 
         <!-- 文章详情 -->
         <el-dialog title="文章详情" :visible.sync="addDialog" :close-on-click-modal="false" width="60%">
-            <el-form ref="form" :model="addOptions" label-width="60px" class="detailsList">
+            <el-form ref="form" :model="addOptions" label-width="80px" class="detailsList">
                 <el-form-item label="分类:">
                     <div class="details"  style="min-height:40px;">{{articleDetails.type_cn}}</div>
                 </el-form-item>
@@ -66,9 +66,9 @@
                     <div class="details">{{articleDetails.describe}}</div>
                 </el-form-item>
 
-                <el-form-item label="内容:">
+                <el-form-item label="视频地址:">
                     <template slot-scope="scope">
-                        <div v-html="articleDetails.content" class="details"></div>
+                        <div v-html="articleDetails.path" class="details"></div>
                     </template>
                 </el-form-item>
             </el-form>
@@ -95,6 +95,7 @@
     export default {
         data() {
             return {
+                url:'',//视频地址
                 articleDetails: {},//文章详情数据
                 deleteId: '',
                 userInfo: {},
@@ -138,8 +139,9 @@
                 // formData.append('type', this.userInfo.type);
                 formData.append('page', this.pageNum);
                 formData.append('count', 10);
-                this.$store.dispatch('articleList', formData) //获取列表数据
+                this.$store.dispatch('videoList', formData) //获取列表数据
                     .then(data => {
+                        this.url=data.weburl;
                         this.total = Number(data.count);
                         this.wordList = data.list;
                     }, err => {
@@ -151,7 +153,7 @@
             },
             //添加
             Add() {
-                this.$router.push({name: 'aloneArticleEdit'})
+                this.$router.push({name: 'aloneVideoEdit'})
             },
             //添加提交
             addSubmit() {
@@ -184,8 +186,9 @@
                 formData.append('uid', this.addOptions.uid);
                 formData.append('token', this.addOptions.token);
                 formData.append('id', row);
-                this.$store.dispatch('articleDetails', formData)
+                this.$store.dispatch('videoDetails', formData)
                     .then(data => {
+                        console.log(data)
                         this.articleDetails = data;
                         this.addDialog = true;
                         // detailsDialog = true;
@@ -195,7 +198,8 @@
             },
             //修改
             Update(obj) {
-                this.$router.push({name: 'Updata'})
+                obj.thumbnail=this.url+obj.thumbnail;
+                this.$router.push({name: 'videoUpData'})
                 this.$store.commit('setPersonalInfo', obj);
                 sessionStorage.setItem('initInfo', JSON.stringify(obj));
                 // this.updateObj = deepClone(obj);
@@ -206,7 +210,7 @@
                 formData.append('uid', this.addOptions.uid);
                 formData.append('token', this.addOptions.token);
                 formData.append('id', id);
-                this.$store.dispatch('deleteData', formData).then(data => {
+                this.$store.dispatch('videoDeleteData', formData).then(data => {
                         this.$message({
                             message: data.message,
                             type: 'success'

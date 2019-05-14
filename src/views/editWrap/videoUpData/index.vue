@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-form ref="form" :model="initInfo" label-width="60px">
+		<el-form ref="form" :model="initInfo" label-width="90px">
 			<el-form-item label="分类:">
 				<el-select v-model="addOptions.type" :placeholder="initInfo.type_cn">
 					<el-option v-for="item in optionsList" :key="item.value" :label="item.label" :value="item.value">
@@ -13,16 +13,21 @@
 			<el-form-item label="描述:">
 				<el-input v-model="initInfo.describe" placeholder="请输入"></el-input>
 			</el-form-item>
-
-			<el-form-item label="内容:">
-				<vue-ueditor-wrap v-model="initInfo.content" :config="myConfig"></vue-ueditor-wrap>
+			<el-form-item label="封面图上传:">
+				<input @change="fileImage" type="file" name="thumbnail" accept="image/jpeg,image/x-png,image/gif" value=""/>
+				<div class="ImgShow">
+					<img :src="initInfo.thumbnail" alt="">
+				</div>
 			</el-form-item>
+			<el-form-item label="视频上传:">
+				<el-input v-model="initInfo.path" placeholder="请输入地址"></el-input>
+			</el-form-item>
+
 		</el-form>
 		<span slot="footer" class="dialog-footer" style="margin-left:40%;">
-			 <el-button @click="$router.go(-1)" type="warning" style="margin-right:50px;">返 回</el-button>
-			<el-button type="primary" @click="UpdataEdit()">提 交</el-button>
+			 <el-button @click.stop="$router.go(-1)" type="warning" style="margin-right:50px;">返 回</el-button>
+			<el-button type="primary" @click.top="uploadVideo()">提 交</el-button>
 		</span>
-		<!-- <vue-ueditor-wrap v-model="content" :config="myConfig"></vue-ueditor-wrap> -->
 	</div>
 </template>
 
@@ -32,6 +37,8 @@
 	export default {
 		data() {
 			return {
+				ImgShow:'',
+				thumbnail:'',
 				initInfo:{},
 				optionsList: [],
 				userInfo: {},
@@ -43,26 +50,12 @@
 					describe: '',
 					content: '',
 				},
-				content: '',
-				myConfig: {
-					// 编辑器不自动被内容撑高
-					autoHeightEnabled: false,
-					// 初始容器高度
-					initialFrameHeight: 540,
-					// 初始容器宽度
-					initialFrameWidth: '100%',
-					// 上传文件接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
-					// serverUrl: 'http://35.201.165.105:8000/controller.php',
-					// UEditor 资源文件的存放路径，如果你使用的是 vue-cli 生成的项目，通常不需要设置该选项，vue-ueditor-wrap 会自动处理常见的情况，如果需要特殊配置，参考下方的常见问题2
-					UEDITOR_HOME_URL: '/UEditor/'
-				},
 			}
 		},
 		computed: mapGetters([
 			'modify',//把数据从getters拿过来
 		]),
 		created() {
-			console.log(this.optionsList)
 			this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 			this.addOptions.uid = this.userInfo.uid;
 			this.addOptions.token = this.userInfo.token;
@@ -75,27 +68,30 @@
 			// this.initInfo=JSON.parse(sessionStorage.getItem('initInfo'));
 			this.getArticleClass();
 		},
-		components: {
-			VueUeditorWrap
-		},
 		methods: {
+			fileImage(e) {
+				var file = e.target.files[0];
+				this.thumbnail = file;
+				// console.log(file)
+			},
 			//添加提交
-			UpdataEdit() {
+			uploadVideo() {
 				let formData = new FormData();
 				formData.append('uid', this.addOptions.uid);
 				formData.append('token', this.addOptions.token );
 				formData.append('id', this.initInfo.id);
 				formData.append('title', this.initInfo.title);
 				formData.append('describe', this.initInfo.describe);
-				formData.append('content', this.initInfo.content);
+				formData.append('thumbnail', this.thumbnail);
+				formData.append('path', this.initInfo.path);
 				formData.append('type', this.addOptions.type);
-				this.$store.dispatch('UpdataEdit', formData)
+				this.$store.dispatch('UpdataVideo', formData)
 						.then(suc => {
 							this.$message({
 								message:suc,
 								type:'success'
 							})
-							this.$router.push({name:'articleEditIndex'});
+							this.$router.push({name:'videoEditIndex'});
 						}, err => {
 							this.$message({
 								message: err,
@@ -109,8 +105,7 @@
 				let formData = new FormData();
 				formData.append('uid', this.addOptions.uid);
 				formData.append('token', this.addOptions.token);
-				this.$store.dispatch('articleClass', formData)
-						.then(data => {
+				this.$store.dispatch('articleClass', formData).then(data => {
 					// var re = new RegExp('<[^<>]+>','g');
 					// var text = html_str.replace(re ,"");
 					var text = data.info.replace(/<[^<>]+>/g, ""); //截取JSON标签里的内容
@@ -129,4 +124,10 @@
 </script>
 
 <style>
+	.ImgShow{
+		width:300px;
+	}
+	.ImgShow img{
+		width:100%;
+	}
 </style>

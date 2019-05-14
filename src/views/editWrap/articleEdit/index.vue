@@ -40,8 +40,8 @@
             <el-table-column label="操作" width="260" align="center">
                 <template slot-scope="scope">
                     <el-button size="mini" type="success" @click.stop="searchDetails(scope.row.id)">详 情</el-button>
-                    <el-button size="mini" @click.stop="Update(scope.row)" type="warning">修 改</el-button>
-                    <el-button size="mini" type="danger" @click="getId(scope.row.id)">删 除</el-button>
+                    <el-button size="mini" @click.stop="Update(scope.row)" type="warning" v-if="scope.row.review_status==0||scope.row.review_status==2">修 改</el-button>
+                    <el-button size="mini" type="danger" @click="getId(scope.row.id)" v-if="scope.row.review_status==0||scope.row.review_status==2">删 除</el-button>
                 </template>
             </el-table-column>
         </el-table>

@@ -1,11 +1,13 @@
 export default {
   route: {
     dashboard: 'Dashboard',
-    myPersonal:'myPersonal',
-    articleEdit:'articleEdit',
-    aloneArticleEdit:'aloneArticleEdit',
-    Updata:'Updata',
-    videoEdit:'videoEdit',
+    myPersonal:'myPersonal',//个人信息
+    aloneArticleEdit:'aloneArticleEdit',//文章发布
+    aloneVideoEdit:'aloneVideoEdit',//视频发布
+    Updata:'Updata',//修改文章
+    videoUpData:'videoUpData',//修改视频
+    articleEdit:'articleEdit',//文章列表
+    videoEdit:'videoEdit',//视频列表
 
     introduction: 'Introduction',
     documentation: 'Documentation',
