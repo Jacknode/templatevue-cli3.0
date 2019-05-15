@@ -20,7 +20,7 @@
 		</el-form>
 		<span slot="footer" class="dialog-footer" style="margin-left:40%;">
 			 <el-button @click="$router.go(-1)" type="warning" style="margin-right:50px;">返 回</el-button>
-			<el-button type="primary" @click="UpdataEdit()">提 交</el-button>
+			<el-button type="primary" @click="UpdataEdit(initInfo)">提 交</el-button>
 		</span>
 		<!-- <vue-ueditor-wrap v-model="content" :config="myConfig"></vue-ueditor-wrap> -->
 	</div>
@@ -80,7 +80,7 @@
 		},
 		methods: {
 			//添加提交
-			UpdataEdit() {
+			UpdataEdit(initInfo) {
 				let formData = new FormData();
 				formData.append('uid', this.addOptions.uid);
 				formData.append('token', this.addOptions.token );
@@ -88,13 +88,14 @@
 				formData.append('title', this.initInfo.title);
 				formData.append('describe', this.initInfo.describe);
 				formData.append('content', this.initInfo.content);
-				formData.append('type', this.addOptions.type);
+				formData.append('type', initInfo.type);
 				this.$store.dispatch('UpdataEdit', formData)
 						.then(suc => {
 							this.$message({
 								message:suc,
 								type:'success'
 							})
+
 							this.$router.push({name:'articleEditIndex'});
 						}, err => {
 							this.$message({

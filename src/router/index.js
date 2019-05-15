@@ -239,6 +239,30 @@ export const constantRouterMap = [{
 			}
 		}]
 	},
+	{ //页面刷新
+		path: '/isRouterAliveIndex',
+		component: Layout,
+		name: 'isRouterAliveIndex',
+		redirect: '/isRouterAliveIndex/isRouterAlive',
+		hidden:true,
+		alwaysShow: true,
+		meta: {
+			title: 'isRouterAlive',
+			icon: 'persoanl',
+			noCache: true
+		},
+		children: [{
+			path: 'isRouterAlive',
+			name: 'videoUpData',
+			component: () =>
+				import('@/views/editWrap/isRouterAlive/index'),
+			meta: {
+				title: 'isRouterAlive',
+				icon: 'persoanl',
+				noCache: true
+			}
+		}]
+	},
 	/**
 	 *  404
 	 **/

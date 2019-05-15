@@ -93,8 +93,10 @@
     } from '@/assets/js/public'
 
     export default {
+        inject:['reload'],
         data() {
             return {
+
                 url:'',//视频地址
                 articleDetails: {},//文章详情数据
                 deleteId: '',
@@ -141,6 +143,7 @@
                 formData.append('count', 10);
                 this.$store.dispatch('videoList', formData) //获取列表数据
                     .then(data => {
+                        console.log(data)
                         this.url=data.weburl;
                         this.total = Number(data.count);
                         this.wordList = data.list;
@@ -188,7 +191,6 @@
                 formData.append('id', row);
                 this.$store.dispatch('videoDetails', formData)
                     .then(data => {
-                        console.log(data)
                         this.articleDetails = data;
                         this.addDialog = true;
                         // detailsDialog = true;
@@ -199,7 +201,7 @@
             //修改
             Update(obj) {
                 obj.thumbnail=this.url+obj.thumbnail;
-                this.$router.push({name: 'videoUpData'})
+                this.$router.push({name: 'videoUpData'});
                 this.$store.commit('setPersonalInfo', obj);
                 sessionStorage.setItem('initInfo', JSON.stringify(obj));
                 // this.updateObj = deepClone(obj);
@@ -211,11 +213,11 @@
                 formData.append('token', this.addOptions.token);
                 formData.append('id', id);
                 this.$store.dispatch('videoDeleteData', formData).then(data => {
-                        this.$message({
+                    this.$message({
                             message: data.message,
                             type: 'success'
                         })
-                        this.initData();
+                        this.reload();
                         this.deleteDialog = false;
                     }, err => {
                         this.$message({

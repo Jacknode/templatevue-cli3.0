@@ -93,6 +93,7 @@
     } from '@/assets/js/public'
 
     export default {
+        inject:['reload'],
         data() {
             return {
                 articleDetails: {},//文章详情数据
@@ -211,7 +212,7 @@
                             message: data.message,
                             type: 'success'
                         })
-                        this.initData();
+                        this.reload();
                         this.deleteDialog = false;
                     }, err => {
 					    this.$message({

@@ -26,7 +26,7 @@
 		</el-form>
 		<span slot="footer" class="dialog-footer" style="margin-left:40%;">
 			 <el-button @click.stop="$router.go(-1)" type="warning" style="margin-right:50px;">返 回</el-button>
-			<el-button type="primary" @click.top="uploadVideo()">提 交</el-button>
+			<el-button type="primary" @click.top="uploadVideo(initInfo)">提 交</el-button>
 		</span>
 	</div>
 </template>
@@ -75,7 +75,7 @@
 				// console.log(file)
 			},
 			//添加提交
-			uploadVideo() {
+			uploadVideo(initInfo) {
 				let formData = new FormData();
 				formData.append('uid', this.addOptions.uid);
 				formData.append('token', this.addOptions.token );
@@ -84,7 +84,7 @@
 				formData.append('describe', this.initInfo.describe);
 				formData.append('thumbnail', this.thumbnail);
 				formData.append('path', this.initInfo.path);
-				formData.append('type', this.addOptions.type);
+				formData.append('type', initInfo.type);
 				this.$store.dispatch('UpdataVideo', formData)
 						.then(suc => {
 							this.$message({

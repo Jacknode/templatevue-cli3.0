@@ -15,10 +15,13 @@
             </el-form-item>
             <el-form-item label="封面图上传:">
                 <input @change="fileImage" type="file" name="thumbnail" accept="image/jpeg,image/x-png,image/gif" value=""/>
+                <img src="" alt="">
+                <span class="limit">* 图片大小不能超过300KB</span>
             </el-form-item>
             <el-form-item label="视频上传:">
                 <!--<input @change="fileVideo" type="file" name="video" accept="audio/mp4,video/mp4" value=""/>-->
-                <el-input v-model="videos" placeholder="请输入地址"></el-input>
+                <el-input v-model="videos" placeholder="请填写视频地址" style="width:60%;padding-right:10px;"></el-input>
+                 <span class="limit">* 请转换成MP4的线上视频播放地址</span>
             </el-form-item>
 
         </el-form>
@@ -79,7 +82,7 @@
             fileImage(e) {
                 var file = e.target.files[0];
                 this.thumbnail = file;
-                // console.log(file)
+                console.log(file)
             },
             // fileVideo(e) {
             //     var file = e.target.files[0];
@@ -173,5 +176,8 @@
     }
     .el-icon-arrow-down {
         font-size: 12px;
+    }
+    .limit{
+        color:red;
     }
 </style>
