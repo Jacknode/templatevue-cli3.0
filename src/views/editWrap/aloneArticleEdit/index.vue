@@ -13,6 +13,9 @@
             <el-form-item label="描述:">
                 <el-input v-model="addOptions.describe" placeholder="请输入"></el-input>
             </el-form-item>
+            <el-form-item>
+                <div class="Tips">*温馨提示：上传图片不能超过100KB。如果大于,请<a href="https://tinypng.com/" class="click" target="_blank">点击这里</a>进行压缩再上传。</div>
+            </el-form-item>
             <el-form-item label="内容:">
                 <vue-ueditor-wrap v-model="addOptions.content" :config="myConfig"></vue-ueditor-wrap>
             </el-form-item>
@@ -124,5 +127,12 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .Tips{
+        color:red;
+    }
+    .click{
+        color:blue;
+        text-decoration: underline ;
+    }
 </style>
